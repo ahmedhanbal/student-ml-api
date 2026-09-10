@@ -43,12 +43,9 @@ def health() -> HealthResponse:
     payload: dict[str, str] = {
         "status": "healthy",
         "application": "student-ml-api",
+        "application_version": "1.1.0",
+        "model_version": "model-1"
     }
-    if APP_VERSION.startswith("1.1"):
-        payload["application_version"] = APP_VERSION
-        payload["model_version"] = MODEL_VERSION
-    else:
-        payload["version"] = APP_VERSION
     return HealthResponse(**payload)
 
 
