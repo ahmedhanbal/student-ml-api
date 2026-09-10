@@ -16,9 +16,11 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
+# Copy and install dependencies first so later app.py-only changes reuse this layer.
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Application files change more often than dependencies.
 COPY app.py VERSION ./
 
 EXPOSE 5000
